@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react"; // Iconos minimalistas
 
@@ -9,7 +9,7 @@ const SideBar = () => {
     <div className="relative">
       {/* Botón para abrir/cerrar Sidebar */}
       <button
-        className="p-2 text-white bg-blue-600 rounded-md"
+        className="p-2 text-white bg-gray-800 rounded-md"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -25,10 +25,10 @@ const SideBar = () => {
         </button>
 
         <ul className="mt-16 space-y-4 text-lg px-4">
-          <li><Link to="/" className="block hover:bg-gray-700 p-2 rounded">Inicio</Link></li>
-          <li><Link to="/dashboard" className="block hover:bg-gray-700 p-2 rounded">Dashboard</Link></li>
-          <li><Link to="/login" className="block hover:bg-gray-700 p-2 rounded">Login</Link></li>
-          <li><Link to="/register" className="block hover:bg-gray-700 p-2 rounded">Registro</Link></li>
+          <li><Link to="/" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Inicio</Link></li>
+          <li><Link to="/dashboard" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Dashboard</Link></li>
+          <li><Link to="/login" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Login</Link></li>
+          <li><Link to="/register" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Registro</Link></li>
         </ul>
       </div>
     </div>
