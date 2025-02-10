@@ -17,32 +17,44 @@ const HomePage = () => {
     <div className="min-h-screen flex flex-col bg-gray-100  ">
       {/* Header Section */}
 
-<div className="relative bg-black h-[50vh] w-full flex items-center justify-center text-white before:content-[''] before:absolute before:inset-0 before:bg-[url('assets/bg-hero.jpg')] before:bg-cover before:bg-center before:opacity-50">
-  
-  {/* Contenido centrado */}
-  <div className="relative z-10 max-w-6xl text-center px-4">
-    <h1 className="text-5xl font-bold mb-4">Bienvenido a TradeReg</h1>
-    <p className="text-lg text-gray-200">
-      Gestiona y analiza tus operaciones de trading con facilidad.
-      Regístrate o inicia sesión para comenzar.
-    </p>
+      <div className=" relative bg-black h-[50vh] w-full flex items-center justify-center text-white before:content-[''] before:absolute before:inset-0 before:bg-[url('assets/bg-hero.jpg')] before:bg-cover before:bg-center before:opacity-50">
+        {/* Contenido centrado */}
+        <div className="relative z-10 max-w-6xl text-center px-4">
+          <h1
+            data-aos="fade-right"
+            data-aos-delay="100"
+            className="text-5xl font-bold mb-4"
+          >
+            Bienvenido a TradeReg
+          </h1>
+          <p
+            data-aos="fade-up"
+            data-aos-delay="500"
+            className="text-lg text-gray-200"
+          >
+            Gestiona y analiza tus operaciones de trading con facilidad.
+            Regístrate o inicia sesión para comenzar.
+          </p>
 
-    {/* Botones */}
-    <div className="mt-6 flex gap-4 justify-center">
-      <Link to="/login">
-        <ButtonComponent className="bg-gray-200 text-black">
-          Iniciar Sesión
-        </ButtonComponent>
-      </Link>
-      <Link to="/register">
-        <ButtonComponent className="bg-white text-black border-white">
-          Registrarse
-        </ButtonComponent>
-      </Link>
-    </div>
-  </div>
-</div>
-
+          {/* Botones */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="900"
+            className="mt-6 flex gap-4 justify-center"
+          >
+            <Link to="/login">
+              <ButtonComponent className="bg-gray-200 text-black">
+                Iniciar Sesión
+              </ButtonComponent>
+            </Link>
+            <Link to="/register">
+              <ButtonComponent className="bg-white text-black border-white">
+                Registrarse
+              </ButtonComponent>
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* Features Section */}
       <div className="max-w-6xl mx-auto py-12">
@@ -90,23 +102,20 @@ const HomePage = () => {
             </div>
             <div className="bg-white p-6 rounded-lg shadow">
               <p className="italic text-gray-600">
-                "Gracias a TradeReg, ahora puedo analizar mis resultados con
-                más confianza."
+                "Gracias a TradeReg, ahora puedo analizar mis resultados con más
+                confianza."
               </p>
               <p className="mt-4 text-right font-bold">- María R.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow">
               <p className="italic text-gray-600">
-                "¡Muy fácil de usar! Recomendaría TradeReg a todos los
-                traders."
+                "¡Muy fácil de usar! Recomendaría TradeReg a todos los traders."
               </p>
               <p className="mt-4 text-right font-bold">- Pedro L.</p>
             </div>
           </div>
         </div>
       </div>
-
-
     </div>
   );
 };

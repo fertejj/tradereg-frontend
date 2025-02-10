@@ -11,14 +11,10 @@ import RegisterPage from "../pages/RegisterPage";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
-
-
 const AppRouter = () => {
-
-
   return (
     <Router>
-      <NavBar />
+      <NavBar  />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
@@ -27,7 +23,7 @@ const AppRouter = () => {
         {/* Redirigir rutas desconocidas a la página de inicio */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 };
