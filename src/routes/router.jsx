@@ -14,7 +14,7 @@ import Footer from "../components/common/Footer";
 const AppRouter = () => {
   return (
     <Router>
-      <NavBar  />
+      <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<DashboardPage />} />

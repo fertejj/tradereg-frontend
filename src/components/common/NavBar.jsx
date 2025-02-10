@@ -5,7 +5,7 @@ const NavBar = () => {
   return (
     <nav  className="bg-green-950 text-white p-4 flex justify-between items-center">
 
-      <h1 className="text-xl font-bold">TradeReg</h1>
+      <Link to={"/"} className="text-xl font-bold">TradeReg</Link>
       <ul className="sm:flex space-x-4 hidden ">
         <li data-aos="fade-down" data-aos-delay="100">
           <Link to="/" className="hover:text-gray-300">

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Button from "../common/Button";
 
 const HeaderSection = () => (
-  <div className="relative h-[50vh] w-full flex items-center justify-center before:content-[''] before:absolute before:inset-0 before:bg-[url('assets/bg-hero.jpg')] before:bg-cover before:bg-center before:opacity-50">
+  <div className="relative h-[60vh] w-full flex items-center justify-center before:content-[''] before:absolute before:inset-0 before:bg-[url('assets/bg-hero.jpg')] before:bg-cover before:bg-center before:opacity-40">
     <div className="relative z-10 max-w-6xl text-center px-4">
       <h1
         data-aos="fade-right"
