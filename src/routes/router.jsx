@@ -8,8 +8,8 @@ import HomePage from "../pages/HomePage";
 import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import NavBar from "../components/common/NavBar";
+import Footer from "../components/common/Footer";
 
 const AppRouter = () => {
   return (

@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div>
-              <div className="bg-green-950 text-white py-6">
+      <div data-aos="fade" className="bg-green-950 text-white py-6">
         <div className="max-w-6xl mx-auto text-center">
           <p>© 2025 TradeReg. Todos los derechos reservados.</p>
           <div className="flex justify-center mt-4 gap-4">
@@ -19,9 +19,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

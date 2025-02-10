@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
-*{
+:root{
     font-family: Liter;
+
+}
+
+html{
+    background-color: rgb(17 24 39);
 }
