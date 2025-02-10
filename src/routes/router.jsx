@@ -9,18 +9,16 @@ import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import NavBar from "../components/NavBar";
-import SideBar from "../components/SideBar";
+import Footer from "../components/Footer";
+
+
 
 const AppRouter = () => {
+
+
   return (
     <Router>
-      <div className="flex">
-
-        <div className="flex-1">
-          <NavBar />
-
-        </div>
-      </div>
+      <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
@@ -29,6 +27,7 @@ const AppRouter = () => {
         {/* Redirigir rutas desconocidas a la página de inicio */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <Footer/>
     </Router>
   );
 };

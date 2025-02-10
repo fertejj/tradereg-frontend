@@ -3,7 +3,7 @@ import SideBar from "./SideBar";
 
 const NavBar = () => {
   return (
-    <nav className="bg-blue-900 text-white p-4 flex justify-between items-center">
+    <nav className="bg-green-950 text-white p-4 flex justify-between items-center">
 
       <h1 className="text-xl font-bold">TradeReg</h1>
       <ul className="sm:flex space-x-4 hidden ">

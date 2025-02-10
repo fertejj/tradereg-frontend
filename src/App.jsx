@@ -1,6 +1,9 @@
+
 import AppRouter from "./routes/router";
 
+
 const App = () => {
+
   return <AppRouter />;
 };
 
