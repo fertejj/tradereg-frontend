@@ -3,7 +3,7 @@ import SideBar from "./SideBar";
 
 const NavBar = () => {
   return (
-    <nav  className="bg-green-950 text-white p-4 flex justify-between items-center">
+    <nav  className="bg-[#040823] text-white p-4 flex justify-between items-center">
 
       <Link to={"/"} className="text-xl font-bold">TradeReg</Link>
       <ul className="sm:flex space-x-4 hidden ">
@@ -19,12 +19,12 @@ const NavBar = () => {
         </li>
         <li data-aos="fade-down" data-aos-delay="300">
           <Link to="/login" className="hover:text-gray-300">
-            Login
+            Iniciar Sesion
           </Link>
         </li>
         <li data-aos="fade-down" data-aos-delay="400">
           <Link to="/register" className="hover:text-gray-300">
-            Registro
+            Registrarse
           </Link>
         </li>
       </ul>

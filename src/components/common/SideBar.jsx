@@ -27,8 +27,8 @@ const SideBar = () => {
         <ul className="mt-16 space-y-4 text-lg px-4">
           <li><Link to="/" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Inicio</Link></li>
           <li><Link to="/dashboard" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Dashboard</Link></li>
-          <li><Link to="/login" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Login</Link></li>
-          <li><Link to="/register" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Registro</Link></li>
+          <li><Link to="/login" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Iniciar Sesion</Link></li>
+          <li><Link to="/register" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Registrarse</Link></li>
         </ul>
       </div>
     </div>
