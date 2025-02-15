@@ -10,6 +10,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import NavBar from "../components/common/NavBar";
 import Footer from "../components/common/Footer";
+import PrivateRoute from "./privateRoutes";
 
 const AppRouter = () => {
   return (
@@ -17,9 +18,10 @@ const AppRouter = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+         {/* RUTA PRIVADA */}
+         <Route path="/dashboard" element={<PrivateRoute element={<DashboardPage />} />} />
         {/* Redirigir rutas desconocidas a la página de inicio */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

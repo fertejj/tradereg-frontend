@@ -1,4 +1,4 @@
-import AppRouter from "./routes/router";
+import AppRouter from "./routes/routes";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
