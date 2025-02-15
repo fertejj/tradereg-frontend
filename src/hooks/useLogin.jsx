@@ -1,5 +1,6 @@
 import { useState } from "react";
 import loginSchema from "../validation/loginSchema";
+import apiClient from "../utils/apiClient";
 
 const useLogin = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -25,22 +26,11 @@ const useLogin = () => {
 
   const sendLoginRequest = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        setErrors({ form: data.message || "Error en el inicio de sesión" });
-        return;
-      }
-
+      const { data } = await apiClient.post("/users/login", formData);
       localStorage.setItem("token", data.data.token);
-      alert("Inicio de sesión exitoso");
-    } catch {
-      setErrors({ form: "Error de conexión con el servidor" });
+      console.log("Inicio de sesión exitoso");
+    } catch (error){
+      setErrors({ form: error.message || "Error al iniciar sesión" });
     }
   };
 
