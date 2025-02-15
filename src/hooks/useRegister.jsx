@@ -12,17 +12,11 @@ const useRegister = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = ({ target: { name, value } }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setErrors({});
-
-    // Validación con Zod
+  const validateForm = () => {
     const validation = registerSchema.safeParse(formData);
     if (!validation.success) {
       const fieldErrors = validation.error.format();
@@ -33,10 +27,12 @@ const useRegister = () => {
         password: fieldErrors.password?._errors?.[0] || "",
         confirmPassword: fieldErrors.confirmPassword?._errors?.[0] || "",
       });
-      setLoading(false);
-      return;
+      return false;
     }
+    return true;
+  };
 
+  const sendRegisterRequest = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/users/register", {
         method: "POST",
@@ -46,22 +42,33 @@ const useRegister = () => {
           lastname: formData.lastname,
           email: formData.email,
           password: formData.password,
+          confirmPassword: formData.confirmPassword,
         }),
       });
 
       const data = await res.json();
-
       if (!res.ok) {
         setErrors({ form: data.message || "Error al registrar usuario" });
-        setLoading(false);
         return;
       }
 
       alert("Registro exitoso. Ahora puedes iniciar sesión.");
-    } catch (error) {
-      setErrors({ form: "Error de conexión con el servidor", error: error });
+    } catch {
+      setErrors({ form: "Error de conexión con el servidor" });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setErrors({});
+
+    if (!validateForm()) {
+      setLoading(false);
+      return;
     }
 
+    await sendRegisterRequest();
     setLoading(false);
   };
 
