@@ -1,5 +1,6 @@
 import { useState } from "react";
 import registerSchema from "../validation/registerSchema";
+import apiClient from "../utils/apiClient";
 
 const useRegister = () => {
   const [formData, setFormData] = useState({
@@ -34,27 +35,16 @@ const useRegister = () => {
 
   const sendRegisterRequest = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/users/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          lastname: formData.lastname,
-          email: formData.email,
-          password: formData.password,
-          confirmPassword: formData.confirmPassword,
-        }),
+      await apiClient.post("/users/register", {
+        name: formData.name,
+        lastname: formData.lastname,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        setErrors({ form: data.message || "Error al registrar usuario" });
-        return;
-      }
-
       alert("Registro exitoso. Ahora puedes iniciar sesión.");
-    } catch {
-      setErrors({ form: "Error de conexión con el servidor" });
+    } catch (error) {
+      setErrors({ form: error.message || "Error al registrar usuario" });
     }
   };
 
