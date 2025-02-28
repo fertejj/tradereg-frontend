@@ -1,11 +1,13 @@
 import { createContext, useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
 
+
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -19,7 +21,6 @@ const AuthProvider = ({ children }) => {
   const login = async (form) => {
     try {
       const res = await apiClient.post("/users/login", form);
-      console.log(res.data.data.token)
       const token = res.data.data.token;
 
       localStorage.setItem("token", token);
@@ -51,18 +52,18 @@ const AuthProvider = ({ children }) => {
         message: error.response?.data?.message || "Error desconocido",
       };
     }
-
-  }
-
-
+  };
 
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
+ 
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, logout, login, register }}>
+    <AuthContext.Provider
+      value={{ user, setUser, loading, logout, login, register }}
+    >
       {children}
     </AuthContext.Provider>
   );

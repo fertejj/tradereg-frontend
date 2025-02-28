@@ -1,10 +1,9 @@
 import { useContext, useState } from "react";
 import registerSchema from "../validation/registerSchema";
-import apiClient from "../utils/apiClient";
 import { AuthContext } from "../context/AuthContext";
 
 const useRegister = () => {
-  const { register } = useContext(AuthContext)
+  const { register } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -39,15 +38,14 @@ const useRegister = () => {
     setLoading(true);
     setErrors(null);
 
-    const res = await register(formData)
+    const res = await register(formData);
     setLoading(false);
-    console.log(res)
+    console.log(res);
     if (!res?.success) {
       setErrors(res?.message);
-  }
+    }
 
-  return res;
-
+    return res;
   };
 
   const handleSubmit = async (e) => {

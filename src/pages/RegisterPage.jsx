@@ -1,10 +1,17 @@
-import useRegister from "../hooks/useRegister"  ;
+import useRegister from "../hooks/useRegister";
 import Input from "../components/auth/Input";
 import Button from "../components/auth/Button";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const { formData, errors, loading, handleChange, handleSubmit } =
-     useRegister();
+    useRegister();
+  const { user } = useContext(AuthContext);
+  if (user) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -52,7 +59,9 @@ const RegisterPage = () => {
             onChange={handleChange}
             error={errors?.confirmPassword}
           />
-          {errors?.form && <p className="text-red-500 text-sm">{errors.form}</p>}
+          {errors?.form && (
+            <p className="text-red-500 text-sm">{errors.form}</p>
+          )}
           <Button
             text={loading ? "Registrando..." : "Registrarse"}
             type="submit"

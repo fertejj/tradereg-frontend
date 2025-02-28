@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react"; // Iconos minimalistas
+import { AuthContext } from "../../context/AuthContext";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { logout, user } = useContext(AuthContext);
 
   return (
     <div className="relative">
@@ -23,13 +25,19 @@ const SideBar = () => {
         >
           <X size={24} />
         </button>
-
+        {user && (
         <ul className="mt-16 space-y-4 text-lg px-4">
           <li><Link to="/" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Inicio</Link></li>
           <li><Link to="/dashboard" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Dashboard</Link></li>
+          <li onClick={logout}><p onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Cerrar sesion</p></li>
+        </ul>
+        )}
+        {!user && (
+        <ul className="mt-16 space-y-4 text-lg px-4">
           <li><Link to="/login" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Iniciar Sesion</Link></li>
           <li><Link to="/register" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 p-2 rounded">Registrarse</Link></li>
         </ul>
+        )}
       </div>
     </div>
   );
