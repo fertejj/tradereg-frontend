@@ -1,32 +1,43 @@
-import PropTypes from "prop-types";
+import { FaPlus, FaEdit, FaTrash, FaFileExport } from "react-icons/fa";
 
-const ToolBar = ({ buttons }) => {
+const ToolBar = () => {
+  const buttons = [
+    {
+      label: "Nuevo Trade",
+      onClick: () => console.log("Nuevo Trade"),
+      icon: <FaPlus />,
+    },
+    {
+      label: "Editar Trade",
+      onClick: () => console.log("Editar Trade"),
+      icon: <FaEdit />,
+    },
+    {
+      label: "Eliminar Trade",
+      onClick: () => console.log("Eliminar Trade"),
+      icon: <FaTrash />,
+    },
+    {
+      label: "Exportar Trades",
+      onClick: () => console.log("Exportar"),
+      icon: <FaFileExport />,
+    },
+  ];
+
   return (
     <nav className="flex justify-between p-3 bg-secondary">
       {buttons.map((button, index) => (
         <button
           key={index}
           onClick={button.onClick}
-          className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition"
+          className=" flex flex-col gap-2 items-center p-4 py-2 w-[120px]  bg-primary-200 text-white rounded hover:bg-primary-dark transition"
         >
-            {button.label}
+          <span className="text-5xl">{button.icon}</span>
+          {button.label}
         </button>
       ))}
     </nav>
   );
-};
-
-ToolBar.propTypes = {
-  buttons: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired, // label debe ser un string obligatorio
-      onClick: PropTypes.func.isRequired, // onClick debe ser una función obligatoria
-    })
-  ),
-};
-
-ToolBar.defaultProps = {
-  buttons: [],
 };
 
 export default ToolBar;
