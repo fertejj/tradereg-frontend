@@ -25,14 +25,14 @@ const ToolBar = () => {
   ];
 
   return (
-    <nav className="flex justify-between p-3 bg-secondary">
+    <nav className="flex gap-1 xl:justify-between m-1 bg-secondary">
       {buttons.map((button, index) => (
         <button
           key={index}
           onClick={button.onClick}
-          className=" flex flex-col gap-2 items-center p-4 py-2 w-[120px]  bg-primary-200 text-white rounded hover:bg-primary-dark transition"
+          className="flex-1 flex flex-col gap-2 items-center p-4 py-2   bg-white-100 text-bg rounded hover:bg-primary-300 hover:text-white-100 transition"
         >
-          <span className="text-5xl">{button.icon}</span>
+          <span className="text-4xl">{button.icon}</span>
           {button.label}
         </button>
       ))}
