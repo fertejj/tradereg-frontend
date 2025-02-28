@@ -30,7 +30,7 @@ const ToolBar = () => {
         <button
           key={index}
           onClick={button.onClick}
-          className="flex-1 flex flex-col gap-2 items-center p-4 py-2   bg-white-100 text-bg rounded hover:bg-primary-300 hover:text-white-100 transition"
+          className="flex-1 flex flex-col gap-2 items-center p-4 py-2   bg-gray-600 text-bg rounded hover:bg-primary-300 hover:text-white-100 transition"
         >
           <span className="text-4xl">{button.icon}</span>
           {button.label}
