@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import SideBar from "./SideBar";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const NavBar = () => {
+  const { logout } = useContext(AuthContext);
+
   return (
     <nav  className="bg-[#040823] text-white p-4 flex justify-between items-center">
 
@@ -26,6 +30,11 @@ const NavBar = () => {
           <Link to="/register" className="hover:text-gray-300">
             Registrarse
           </Link>
+        </li>
+        <li data-aos="fade-down" data-aos-delay="400">
+          <p onClick={logout} className="hover:text-gray-300">
+            Cerrar sesion
+          </p>
         </li>
       </ul>
       <div className="flex sm:hidden">

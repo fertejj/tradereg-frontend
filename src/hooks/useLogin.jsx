@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import loginSchema from "../validation/loginSchema";
-import apiClient from "../utils/apiClient";
+import { AuthContext } from "../context/AuthContext";
 
 const useLogin = () => {
+  const authContext = useContext(AuthContext);
+  if (!authContext) {
+    throw new Error("AuthContext no está disponible. Asegúrate de envolver tu aplicación con <AuthContext.Provider>");
+  }
+
+  const { login } = authContext;
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -24,27 +31,35 @@ const useLogin = () => {
     return true;
   };
 
-  const sendLoginRequest = async () => {
-    try {
-      const { data } = await apiClient.post("/users/login", formData);
-      localStorage.setItem("token", data.data.token);
-      console.log("Inicio de sesión exitoso");
-    } catch (error){
-      setErrors({ form: error.message || "Error al iniciar sesión" });
+  const handleLogin = async () => {
+    setLoading(true);
+    setErrors({});  // Evita `null`
+
+    if (!formData || typeof formData.email === "undefined") {
+      console.error("formData no está definido correctamente");
+      setLoading(false);
+      return;
+    }
+
+    const res = await login(formData);
+    setLoading(false);
+
+    if (!res.success) {
+      setErrors(res.message);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrors({});
+    setErrors({}); // Asegurar que no es null
 
     if (!validateForm()) {
       setLoading(false);
       return;
     }
 
-    await sendLoginRequest();
+    await handleLogin();
     setLoading(false);
   };
 
