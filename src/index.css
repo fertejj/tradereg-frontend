@@ -1,11 +1,20 @@
 @import "tailwindcss";
 
-:root{
-    font-family: Montserrat;
-
+@theme {
+    --color-primary-100: #3B82F6;
+    --color-primary-200: #2563EB;
+    --color-primary-300: #1E3A8A;
+    --color-bg: #0F172A;
+    --color-secondary-100: #334155 ;
+    --color-secondary-200: #1E293B;
+    --color-tertiary-100: #06B6D4;
+    --color-white-100: #E2E8F0;
 }
 
-html{
-    background-color: rgb(11, 33, 80);
+:root {
+  font-family: Montserrat;
+}
 
+html {
+  background-color: #0F172A;
 }

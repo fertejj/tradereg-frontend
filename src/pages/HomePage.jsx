@@ -4,7 +4,7 @@ import TestimonialsSection from "../components/homepage/TestimonialsSection";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen flex flex-col text-white bg-gray-900">
+    <div className="min-h-screen flex flex-col text-white-100 bg-bg">
       <HeaderSection />
       <FeaturesSection />
       <TestimonialsSection />

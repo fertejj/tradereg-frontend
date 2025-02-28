@@ -13,7 +13,7 @@ const LoginPage = () => {
   }
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-white p-6 rounded-3xl min-w-96 w-[30%]">
+      <div className="bg-white-100 p-6 rounded-3xl min-w-96 w-[30%]">
         <h2 className="text-2xl font-bold text-center mb-4">Iniciar Sesión</h2>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">

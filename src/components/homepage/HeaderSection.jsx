@@ -25,12 +25,12 @@ const HeaderSection = () => (
         className="mt-6 flex gap-4 justify-center"
       >
         <Link to="/login">
-          <Button className="bg-gray-200 text-black hover:bg-transparent border border-white hover:text-white ">
+          <Button className="bg-gray-200 text-black hover:bg-transparent border border-white-100 hover:text-white-100 ">
             Iniciar Sesión
           </Button>
         </Link>
         <Link to="/register">
-          <Button className="bg-white text-black border-white hover:bg-transparent border border-white hover:text-white ">
+          <Button className="bg-white-100 text-black border-white-100 hover:bg-transparent border border-white-100 hover:text-white-100 ">
             Registrarse
           </Button>
         </Link>

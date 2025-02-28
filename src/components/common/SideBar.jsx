@@ -11,14 +11,14 @@ const SideBar = () => {
     <div className="relative">
       {/* Botón para abrir/cerrar Sidebar */}
       <button
-        className="p-2 text-white bg-gray-800 rounded-md"
+        className="p-2 text-white-100 bg-bg rounded-md"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
       {/* Sidebar */}
-      <div className={`fixed z-50 top-0 left-0 h-full w-64 bg-gray-800 text-white transform ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out`}>
+      <div className={`fixed z-50 top-0 left-0 h-full w-64 bg-gray-800 text-white-100 transform ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out`}>
         <button
           className="absolute top-4 right-4 text-gray-300 "
           onClick={() => setIsOpen(false)}

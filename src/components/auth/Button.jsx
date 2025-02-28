@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const Button = ({ text, onClick, variant = "primary", type = "submit" }) => {
   const styles =
     variant === "primary"
-      ? "bg-blue-500 text-white hover:bg-blue-600"
+      ? "bg-blue-500 text-white-100 hover:bg-blue-600"
       : "bg-gray-300 text-black hover:bg-gray-400";
 
   return (

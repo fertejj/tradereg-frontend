@@ -7,7 +7,7 @@ const NavBar = () => {
   const { logout, user } = useContext(AuthContext);
 
   return (
-    <nav  className="bg-[#040823] text-white p-4 flex justify-between items-center">
+    <nav  className="bg-bg text-white-100 p-4 flex justify-between items-center">
 
       <Link to={"/"} className="text-xl font-bold">TradeReg</Link>
       {user && (
