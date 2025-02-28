@@ -1,15 +1,18 @@
 import { useContext, useState } from "react";
 import loginSchema from "../validation/loginSchema";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
   const authContext = useContext(AuthContext);
   if (!authContext) {
-    throw new Error("AuthContext no está disponible. Asegúrate de envolver tu aplicación con <AuthContext.Provider>");
+    throw new Error(
+      "AuthContext no está disponible. Asegúrate de envolver tu aplicación con <AuthContext.Provider>"
+    );
   }
 
   const { login } = authContext;
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -33,7 +36,7 @@ const useLogin = () => {
 
   const handleLogin = async () => {
     setLoading(true);
-    setErrors({});  // Evita `null`
+    setErrors({}); // Evita `null`
 
     if (!formData || typeof formData.email === "undefined") {
       console.error("formData no está definido correctamente");
@@ -60,6 +63,7 @@ const useLogin = () => {
     }
 
     await handleLogin();
+    navigate("/dashboard");
     setLoading(false);
   };
 

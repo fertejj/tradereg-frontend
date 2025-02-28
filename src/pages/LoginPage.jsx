@@ -1,10 +1,16 @@
 import useLogin from "../hooks/useLogin";
 import Input from "../components/auth/Input";
 import Button from "../components/auth/Button";
+import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const LoginPage = () => {
   const { formData, errors, loading, handleChange, handleSubmit } = useLogin();
-
+  const { user } = useContext(AuthContext);
+  if (user) {
+    return <Navigate to="/dashboard" />;
+  }
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="bg-white p-6 rounded-3xl min-w-96 w-[30%]">
