@@ -4,14 +4,9 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
-  const authContext = useContext(AuthContext);
-  if (!authContext) {
-    throw new Error(
-      "AuthContext no está disponible. Asegúrate de envolver tu aplicación con <AuthContext.Provider>"
-    );
-  }
 
-  const { login } = authContext;
+
+  const { login } = useContext(AuthContext)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
@@ -37,12 +32,6 @@ const useLogin = () => {
   const handleLogin = async () => {
     setLoading(true);
     setErrors({}); // Evita `null`
-
-    if (!formData || typeof formData.email === "undefined") {
-      console.error("formData no está definido correctamente");
-      setLoading(false);
-      return;
-    }
 
     const res = await login(formData);
     setLoading(false);

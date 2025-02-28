@@ -34,6 +34,26 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (formData) => {
+    try {
+      await apiClient.post("/users/register", {
+        name: formData.name,
+        lastname: formData.lastname,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+      });
+      alert("Registro exitoso. Ahora puedes iniciar sesión.");
+    } catch (error) {
+      console.error("Error en el registro:", error);
+      return {
+        success: false,
+        message: error.response?.data?.message || "Error desconocido",
+      };
+    }
+
+  }
+
 
 
   const logout = () => {
@@ -42,7 +62,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, logout, login }}>
+    <AuthContext.Provider value={{ user, setUser, loading, logout, login, register }}>
       {children}
     </AuthContext.Provider>
   );

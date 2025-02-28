@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import registerSchema from "../validation/registerSchema";
 import apiClient from "../utils/apiClient";
+import { AuthContext } from "../context/AuthContext";
 
 const useRegister = () => {
+  const { register } = useContext(AuthContext)
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -33,19 +35,19 @@ const useRegister = () => {
     return true;
   };
 
-  const sendRegisterRequest = async () => {
-    try {
-      await apiClient.post("/users/register", {
-        name: formData.name,
-        lastname: formData.lastname,
-        email: formData.email,
-        password: formData.password,
-        confirmPassword: formData.confirmPassword,
-      });
-      alert("Registro exitoso. Ahora puedes iniciar sesión.");
-    } catch (error) {
-      setErrors({ form: error.message || "Error al registrar usuario" });
-    }
+  const handleRegister = async () => {
+    setLoading(true);
+    setErrors(null);
+
+    const res = await register(formData)
+    setLoading(false);
+    console.log(res)
+    if (!res?.success) {
+      setErrors(res?.message);
+  }
+
+  return res;
+
   };
 
   const handleSubmit = async (e) => {
@@ -58,7 +60,7 @@ const useRegister = () => {
       return;
     }
 
-    await sendRegisterRequest();
+    await handleRegister();
     setLoading(false);
   };
 

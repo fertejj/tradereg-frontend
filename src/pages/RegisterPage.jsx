@@ -18,7 +18,7 @@ const RegisterPage = () => {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            error={errors.email}
+            error={errors?.email}
           />
           <Input
             label="Nombre"
@@ -26,7 +26,7 @@ const RegisterPage = () => {
             type="text"
             value={formData.name}
             onChange={handleChange}
-            error={errors.name}
+            error={errors?.name}
           />
           <Input
             label="Apellido"
@@ -34,7 +34,7 @@ const RegisterPage = () => {
             type="text"
             value={formData.lastname}
             onChange={handleChange}
-            error={errors.lastname}
+            error={errors?.lastname}
           />
           <Input
             label="Contraseña"
@@ -42,7 +42,7 @@ const RegisterPage = () => {
             type="password"
             value={formData.password}
             onChange={handleChange}
-            error={errors.password}
+            error={errors?.password}
           />
           <Input
             label="Confirmar Contraseña"
@@ -50,9 +50,9 @@ const RegisterPage = () => {
             type="password"
             value={formData.confirmPassword}
             onChange={handleChange}
-            error={errors.confirmPassword}
+            error={errors?.confirmPassword}
           />
-          {errors.form && <p className="text-red-500 text-sm">{errors.form}</p>}
+          {errors?.form && <p className="text-red-500 text-sm">{errors.form}</p>}
           <Button
             text={loading ? "Registrando..." : "Registrarse"}
             type="submit"
