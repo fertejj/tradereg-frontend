@@ -1,25 +1,41 @@
+import { useState } from "react";
 import { FaPlus, FaEdit, FaTrash, FaFileExport } from "react-icons/fa";
+import Modal from "../../common/Modal";
+import TradeForm from "./TradeForm";
 
 const ToolBar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+
+  const openModal = (content) => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalContent(null);
+  };
+
   const buttons = [
     {
       label: "Nuevo Trade",
-      onClick: () => console.log("Nuevo Trade"),
+      onClick: () => openModal(<TradeForm />),
       icon: <FaPlus />,
     },
     {
       label: "Editar Trade",
-      onClick: () => console.log("Editar Trade"),
+      onClick: () => openModal(<p>Formulario para editar trade</p>),
       icon: <FaEdit />,
     },
     {
       label: "Eliminar Trade",
-      onClick: () => console.log("Eliminar Trade"),
+      onClick: () => openModal(<p>¿Estás seguro de que deseas eliminar este trade?</p>),
       icon: <FaTrash />,
     },
     {
       label: "Exportar Trades",
-      onClick: () => console.log("Exportar"),
+      onClick: () => openModal(<p>Exportando trades...</p>),
       icon: <FaFileExport />,
     },
   ];
@@ -30,12 +46,17 @@ const ToolBar = () => {
         <button
           key={index}
           onClick={button.onClick}
-          className="flex-1 flex flex-col gap-2 items-center p-4 py-2   bg-gray-600 text-bg rounded hover:bg-primary-300 hover:text-white-100 transition"
+          className="flex-1 flex flex-col gap-2 items-center p-4 py-2 bg-gray-600 text-bg rounded hover:bg-primary-300 hover:text-white-100 transition"
         >
           <span className="text-4xl">{button.icon}</span>
           {button.label}
         </button>
       ))}
+
+      {/* 🔥 Modal único que se renderiza fuera del loop */}
+      <Modal isOpen={isModalOpen} onClose={closeModal} title="Operando">
+        {modalContent}
+      </Modal>
     </nav>
   );
 };

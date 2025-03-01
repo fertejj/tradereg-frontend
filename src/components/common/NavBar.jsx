@@ -24,7 +24,7 @@ const NavBar = () => {
             </Link>
           </li>
           <li data-aos="fade-down" data-aos-delay="400">
-            <p onClick={logout} className="hover:text-gray-300">
+            <p onClick={logout} className="hover:text-gray-300 cursor-pointer">
               Cerrar sesion
             </p>
           </li>
