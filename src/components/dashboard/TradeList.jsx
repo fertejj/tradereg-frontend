@@ -8,9 +8,9 @@ const TradeList = () => {
   ];
 
   return (
-<div className="p-4 m-1 bg-gray-600 rounded-lg  text-bg shadow-md">
+<div className="p-4 m-1 bg-gray-800 rounded-lg  text-gray-400 shadow-md">
   <h2 className="text-lg font-semibold mb-2">Operaciones Registradas:</h2>
-  <div className="bg-gray-500 p-2 rounded-md shadow">
+  <div className="bg-gray-700 p-2 rounded-md shadow">
     <div className="grid grid-cols-4 xl:grid-cols-5 font-semibold border-b p-2 text-center ">
       <span>Fecha</span>
       <span>Par</span>

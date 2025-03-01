@@ -6,13 +6,13 @@ const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null; // No renderiza el modal si está cerrado
 
   return (
-    <div className="fixed  inset-0 bg-bg/70 flex justify-center items-center z-50 ">
-      <div className="bg-gray-600 p-3 rounded-lg w-[70%] max-h-[80vh] overflow-hidden">
+    <div className="fixed inset-0 bg-bg/70 flex justify-center items-center z-50 ">
+      <div className="bg-gray-800 p-3 rounded-lg w-[70%] max-h-[80vh] overflow-hidden">
         <div className="flex justify-end items-center ">
 
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 mb-2 hover:text-gray-700"
           >
             <svg
               className="w-6 h-6"

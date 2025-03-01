@@ -30,7 +30,8 @@ const ToolBar = () => {
     },
     {
       label: "Eliminar Trade",
-      onClick: () => openModal(<p>¿Estás seguro de que deseas eliminar este trade?</p>),
+      onClick: () =>
+        openModal(<p>¿Estás seguro de que deseas eliminar este trade?</p>),
       icon: <FaTrash />,
     },
     {
@@ -46,7 +47,7 @@ const ToolBar = () => {
         <button
           key={index}
           onClick={button.onClick}
-          className="flex-1 flex flex-col gap-2 items-center p-4 py-2 bg-gray-600 text-bg rounded hover:bg-primary-300 hover:text-white-100 transition"
+          className="flex-1 flex flex-col gap-2 items-center p-4 py-2 bg-gray-800 text-gray-400 rounded hover:bg-primary-300 hover:text-white-100 transition"
         >
           <span className="text-4xl">{button.icon}</span>
           {button.label}

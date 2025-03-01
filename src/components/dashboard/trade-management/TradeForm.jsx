@@ -5,6 +5,7 @@ export default function TradeForm() {
     symbol: "BTC/USD",
     side: "LONG",
     entryPrice: 96500,
+    closePrice: 98500,
     operatedVolume: 300,
     pnl: 25,
     fees: 0,
@@ -24,7 +25,7 @@ export default function TradeForm() {
   };
 
   return (
-    <div className="mx-auto overflow-y-scroll max-h-[70vh] pr-3">
+    <div className="mx-auto overflow-y-scroll max-h-[70vh] pr-3 text-gray-400 ">
       <h2 className="text-2xl text-center font-bold mb-4">Registrar Trade</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -53,6 +54,7 @@ export default function TradeForm() {
 
         {[
           { field: "entryPrice", label: "Precio de entrada" },
+          { field: "closePrice", label: "Precio de cierre" },
           { field: "operatedVolume", label: "Volumen operado" },
           { field: "pnl", label: "PnL" },
           { field: "fees", label: "Comision" },
