@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
+import { FaPlus, FaTrash, FaFileExport } from "react-icons/fa";
 import Modal from "../../common/Modal";
-import TradeForm from "./TradeForm";
 
-const ToolBar = () => {
+
+const ToolBarAcc = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
@@ -19,20 +19,20 @@ const ToolBar = () => {
 
   const buttons = [
     {
-      label: "Nuevo Trade",
-      onClick: () => openModal(<TradeForm />),
+      label: "Nueva Cuenta",
+      onClick: () => openModal(<p>FASITO</p>),
       icon: <FaPlus />,
     },
     {
-      label: "Editar Trade",
-      onClick: () => openModal(<p>Formulario para editar trade</p>),
-      icon: <FaEdit />,
+      label: "Eliminar Cuenta",
+      onClick: () =>
+        openModal(<p>¿Estás seguro de que deseas eliminar esta cuenta?</p>),
+      icon: <FaTrash />,
     },
     {
-      label: "Eliminar Trade",
-      onClick: () =>
-        openModal(<p>¿Estás seguro de que deseas eliminar este trade?</p>),
-      icon: <FaTrash />,
+      label: "Exportar Trades",
+      onClick: () => openModal(<p>Exportando trades...</p>),
+      icon: <FaFileExport />,
     },
   ];
 
@@ -57,4 +57,4 @@ const ToolBar = () => {
   );
 };
 
-export default ToolBar;
+export default ToolBarAcc;
