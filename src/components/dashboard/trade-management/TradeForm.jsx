@@ -28,48 +28,53 @@ export default function TradeForm() {
       <h2 className="text-2xl text-center font-bold mb-4">Registrar Trade</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium">Symbol</label>
-          <input 
-            type="text" 
-            name="symbol" 
-            value={trade.symbol} 
-            onChange={handleChange} 
-            className="w-full p-2 border rounded" 
+          <label className="block text-sm font-medium">Simbolo</label>
+          <input
+            type="text"
+            name="symbol"
+            value={trade.symbol}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
           />
         </div>
-        
+
         <div>
-          <label className="block text-sm font-medium">Side</label>
-          <select 
-            name="side" 
-            value={trade.side} 
-            onChange={handleChange} 
+          <label className="block text-sm font-medium">Lado</label>
+          <select
+            name="side"
+            value={trade.side}
+            onChange={handleChange}
             className="w-full p-2 border rounded"
           >
             <option value="LONG">LONG</option>
             <option value="SHORT">SHORT</option>
           </select>
         </div>
-        
-        {["entryPrice", "operatedVolume", "pnl", "fees"].map((field) => (
-          <div key={field}>
-            <label className="block text-sm font-medium">{field}</label>
-            <input 
-              type="number" 
-              name={field} 
-              value={trade[field]} 
-              onChange={handleChange} 
-              className="w-full p-2 border rounded" 
+
+        {[
+          { field: "entryPrice", label: "Precio de entrada" },
+          { field: "operatedVolume", label: "Volumen operado" },
+          { field: "pnl", label: "PnL" },
+          { field: "fees", label: "Comision" },
+        ].map((item) => (
+          <div key={item.field}>
+            <label className="block text-sm font-medium">{item.label}</label>
+            <input
+              type="number"
+              name={item.field}
+              value={trade[item.field]}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
             />
           </div>
         ))}
-        
+
         <div>
           <label className="block text-sm font-medium">Status</label>
-          <select 
-            name="status" 
-            value={trade.status} 
-            onChange={handleChange} 
+          <select
+            name="status"
+            value={trade.status}
+            onChange={handleChange}
             className="w-full p-2 border rounded"
           >
             <option value="ABIERTA">ABIERTA</option>
@@ -79,10 +84,10 @@ export default function TradeForm() {
 
         <div>
           <label className="block text-sm font-medium">Result</label>
-          <select 
-            name="result" 
-            value={trade.result} 
-            onChange={handleChange} 
+          <select
+            name="result"
+            value={trade.result}
+            onChange={handleChange}
             className="w-full p-2 border rounded"
           >
             <option value="GANADORA">GANADORA</option>
@@ -90,7 +95,10 @@ export default function TradeForm() {
           </select>
         </div>
 
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded"
+        >
           Registrar Trade
         </button>
       </form>
