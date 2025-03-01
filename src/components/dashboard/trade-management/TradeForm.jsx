@@ -1,16 +1,18 @@
 import { useState } from "react";
+import { tradeService } from "../../../services/tradeService"
 
 export default function TradeForm() {
+  //Estado que maneja el trade
   const [trade, setTrade] = useState({
     symbol: "BTC/USD",
-    side: "LONG",
-    entryPrice: 96500,
-    closePrice: 98500,
-    operatedVolume: 300,
-    pnl: 25,
+    side: "",
+    entryPrice: 0,
+    closePrice: 0,
+    operatedVolume: 0,
+    pnl: 0,
     fees: 0,
-    status: "CERRADA",
-    result: "GANADORA",
+    status: "",
+    result: "",
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   });
@@ -21,7 +23,7 @@ export default function TradeForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("formulario llenado:", trade);
+    tradeService.createTrade(trade)
   };
 
   return (
@@ -71,18 +73,6 @@ export default function TradeForm() {
           </div>
         ))}
 
-        <div>
-          <label className="block text-sm font-medium">Status</label>
-          <select
-            name="status"
-            value={trade.status}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          >
-            <option value="ABIERTA">ABIERTA</option>
-            <option value="CERRADA">CERRADA</option>
-          </select>
-        </div>
 
         <div>
           <label className="block text-sm font-medium">Result</label>
