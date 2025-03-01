@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types'; // Importa PropTypes
 
 // Modal reusable component
-const Modal = ({ isOpen, onClose, title, children }) => {
+const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null; // No renderiza el modal si está cerrado
 
   return (
-    <div className="fixed inset-0 bg-bg/70 flex justify-center items-center z-50">
-      <div className="bg-gray-600 p-6 rounded-lg w-[70%]">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-bg">{title}</h2>
+    <div className="fixed  inset-0 bg-bg/70 flex justify-center items-center z-50 ">
+      <div className="bg-gray-600 p-3 rounded-lg w-[70%] max-h-[80vh] overflow-hidden">
+        <div className="flex justify-end items-center ">
+
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
