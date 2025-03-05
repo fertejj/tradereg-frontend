@@ -1,0 +1,33 @@
+import apiClient from "../utils/apiClient";
+
+export const accountService = {
+  // Crear una nueva cuenta
+  createAccount: (accountData) => {
+    return apiClient.post("/accounts", accountData);
+  },
+
+  // Obtener todas las cuentas del usuario
+  getAccounts: () => {
+    return apiClient.get("/accounts");
+  },
+
+  // Obtener una cuenta específica por ID
+  getAccount: (accountId) => {
+    return apiClient.get(`/accounts/${accountId}`);
+  },
+
+  // Actualizar una cuenta existente
+  updateAccount: (accountId, accountData) => {
+    return apiClient.patch(`/accounts/${accountId}`, accountData);
+  },
+
+  // Eliminar una cuenta
+  deleteAccount: (accountId) => {
+    return apiClient.delete(`/accounts/${accountId}`);
+  },
+
+  // Obtener informacion de una cuenta
+  getAccountBalance: (accountId) => {
+    return apiClient.get(`/accounts/${accountId}`);
+  },
+};

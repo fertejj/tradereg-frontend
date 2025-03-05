@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaPlus, FaTrash, FaFileExport } from "react-icons/fa";
 import Modal from "../../common/Modal";
+import AccountForm from "./AccountForm";
 
 
 const ToolBarAcc = () => {
@@ -20,7 +21,7 @@ const ToolBarAcc = () => {
   const buttons = [
     {
       label: "Nueva Cuenta",
-      onClick: () => openModal(<p>FASITO</p>),
+      onClick: () => openModal(<AccountForm/>),
       icon: <FaPlus />,
     },
     {

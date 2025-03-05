@@ -1,39 +1,57 @@
-import { Link } from "react-router-dom";
-import Button from "../common/Button";
+import React from 'react';
+
+const Button = ({ children, className }) => (
+  <button className={`px-6 py-3 font-medium rounded-lg transition-all duration-300 ${className}`}>
+    {children}
+  </button>
+);
 
 const HeaderSection = () => (
-  <div className="relative h-[60vh] w-full flex items-center justify-center before:content-[''] before:absolute before:inset-0 before:bg-[url('assets/bg-hero.jpg')] before:bg-cover before:bg-center before:opacity-40">
-    <div className="relative z-10 max-w-6xl text-center px-4">
-      <h1
-        data-aos="fade-right"
-        data-aos-delay="100"
-        className="text-5xl font-bold mb-4"
-      >
-        Bienvenido a TradeReg
+  <div className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+
+    {/* <div className="absolute inset-0 bg-black">
+
+      <img 
+        src="/api/placeholder/1920/1080" 
+        alt="Trading background" 
+        className="w-full h-full object-cover opacity-40"
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
+    </div> */}
+    
+    {/* Elementos decorativos */}
+    <div className="absolute top-0 left-0 w-full h-full">
+      <div className="absolute top-20 left-20 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+    </div>
+    
+    {/* Contenido principal */}
+    <div className="relative z-10 max-w-5xl mx-auto text-center px-4">
+      <div className="inline-block mb-3 px-4 py-1 bg-blue-500/20 backdrop-blur-md rounded-full">
+        <span className="text-blue-300 font-medium text-sm">Plataforma de trading #1 para traders serios</span>
+      </div>
+      
+      <h1 className="text-5xl md:text-7xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-300">
+        Bienvenido a <span className="text-blue-400">TradeReg</span>
       </h1>
-      <p
-        data-aos="fade-up"
-        data-aos-delay="500"
-        className="text-lg text-gray-200"
-      >
-        Gestiona y analiza tus operaciones de trading con facilidad. Regístrate
-        o inicia sesión para comenzar.
+      
+      <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">
+        Registra, analiza y optimiza tus operaciones con nuestra plataforma diseñada por traders para traders.
       </p>
-      <div
-        data-aos="fade-up"
-        data-aos-delay="900"
-        className="mt-6 flex gap-4 justify-center"
-      >
-        <Link to="/login">
-          <Button className="bg-gray-200 text-black hover:bg-transparent border border-white-100 hover:text-white-100 ">
-            Iniciar Sesión
-          </Button>
-        </Link>
-        <Link to="/register">
-          <Button className="bg-white-100 text-black border-white-100 hover:bg-transparent border border-white-100 hover:text-white-100 ">
-            Registrarse
-          </Button>
-        </Link>
+      
+      <div className="flex flex-col sm:flex-row gap-6 justify-center">
+        <Button className="bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/30">
+          Iniciar Sesión
+        </Button>
+        <Button className="bg-transparent text-white border-2 border-white/20 hover:bg-white/10 backdrop-blur-sm">
+          Registrarse Gratis
+        </Button>
+      </div>
+      
+      {/* Indicador de scroll */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+
       </div>
     </div>
   </div>
