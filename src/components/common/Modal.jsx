@@ -7,7 +7,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="fixed inset-0 bg-bg/70 flex justify-center items-center z-50 ">
-      <div className="bg-gray-800 p-3 rounded-lg w-[70%] max-h-[80vh] overflow-hidden">
+      <div className="bg-gray-900 p-3 rounded-lg w-[85%] max-h-[80vh] overflow-hidden">
         <div className="flex justify-end items-center ">
 
           <button

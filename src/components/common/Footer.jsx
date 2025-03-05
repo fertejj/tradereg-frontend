@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="mt-10">
       <div  className="bg-bg text-white-100 py-6">
         <div className="max-w-6xl mx-auto text-center">
           <p>© 2025 TradeReg. Todos los derechos reservados.</p>

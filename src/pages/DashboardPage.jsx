@@ -12,9 +12,10 @@ const DashboardPage = () => {
   }
   return (
     <div className="bg-bg h-[75vh] text-white-100">
-      <ToolBarAcc />
       <ToolBar />
       <TradeList />
+      <ToolBarAcc />
+
     </div>
   );
 };
