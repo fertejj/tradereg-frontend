@@ -6,7 +6,7 @@ import TradeList from "../components/dashboard/trade-management/TradeList";
 import {
   FilterButton,
   FilterPanel,
-} from "../components/dashboard/trade-management/FilterList";
+} from "../components/dashboard/trade-management/FilterPanel";
 import Modal from "../components/common/Modal";
 import TradeForm from "../components/dashboard/trade-management/TradeForm";
 
