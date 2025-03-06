@@ -1,33 +1,60 @@
 import apiClient from "../utils/apiClient";
 
 export const accountService = {
-  // Crear una nueva cuenta
-  createAccount: (accountData) => {
-    return apiClient.post("/accounts", accountData);
+  createAccount: async (accountData) => {
+    try {
+      // Aseguramos que initialBalance sea un número
+      const data = {
+        ...accountData,
+        initialBalance: Number(accountData.initialBalance)
+      };
+      
+      console.log("Datos enviados al servidor:", data);
+      const response = await apiClient.post('/trading-accounts', data);
+      return response.data;
+    } catch (error) {
+      console.error("Error creating account:", error.response?.data || error);
+      throw error;
+    }
   },
-
-  // Obtener todas las cuentas del usuario
-  getAccounts: () => {
-    return apiClient.get("/accounts");
+  
+  getAccounts: async () => {
+    try {
+      const response = await apiClient.get('/trading-accounts');
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching accounts:", error);
+      throw error;
+    }
   },
-
-  // Obtener una cuenta específica por ID
-  getAccount: (accountId) => {
-    return apiClient.get(`/accounts/${accountId}`);
+  
+  getAccountsByUserId: async (userId) => {
+    try {
+      const response = await apiClient.get(`/trading-accounts/user/${userId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching accounts for user ${userId}:`, error);
+      throw error;
+    }
   },
-
-  // Actualizar una cuenta existente
-  updateAccount: (accountId, accountData) => {
-    return apiClient.patch(`/accounts/${accountId}`, accountData);
+  
+  updateAccount: async (id, accountData) => {
+    try {
+      const response = await apiClient.put(`/trading-accounts/${id}`, accountData);
+      return response.data;
+    } catch (error) {
+      console.error(`Error updating account ${id}:`, error);
+      throw error;
+    }
   },
-
-  // Eliminar una cuenta
-  deleteAccount: (accountId) => {
-    return apiClient.delete(`/accounts/${accountId}`);
-  },
-
-  // Obtener informacion de una cuenta
-  getAccountBalance: (accountId) => {
-    return apiClient.get(`/accounts/${accountId}`);
-  },
+  
+  deleteAccount: async (id) => {
+    try {
+      const response = await apiClient.delete(`/trading-accounts/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error deleting account ${id}:`, error);
+      throw error;
+    }
+  }
 };

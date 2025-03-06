@@ -22,9 +22,9 @@ const AuthProvider = ({ children }) => {
     try {
       const res = await apiClient.post("/users/login", form);
       const token = res.data.data.token;
-
+      const user = res.data.data.user;
       localStorage.setItem("token", token);
-      setUser({ token });
+      setUser({ token, user });
       return { success: true };
     } catch (error) {
       console.error("Error en login:", error);
