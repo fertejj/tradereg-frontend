@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import DashboardPage from "../pages/DashboardPage";
+import ProfilePage from "../pages/ProfilePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import NavBar from "../components/common/NavBar";
@@ -26,6 +27,7 @@ const AppRouter = () => {
             <Route path="/register" element={<RegisterPage />} />
             {/* RUTA PRIVADA */}
             <Route path="/dashboard" element={<PrivateRoute element={<DashboardPage />} />} />
+            <Route path="/profile" element={<PrivateRoute element={<ProfilePage />} />} />
             {/* Redirigir rutas desconocidas a la página de inicio */}
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
