@@ -1,17 +1,14 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
-import { Plus, Download } from "lucide-react";
+import { FilterPanel } from "../components/dashboard/trade-management/FilterPanel";
 import TradeList from "../components/dashboard/trade-management/TradeList";
-import {
-  FilterButton,
-  FilterPanel,
-} from "../components/dashboard/trade-management/FilterPanel";
 import Modal from "../components/common/Modal";
-import TradeForm from "../components/dashboard/trade-management/TradeForm";
 import Pagination from "../components/common/Pagination";
 import NavigationTabs from "../components/dashboard/trade-management/NavigationTabs";
 import SummaryCards from "../components/dashboard/SummaryCards";
+import ActionButtons from "../components/dashboard/trade-management/ActionButtons";
+import AccountSelector from "../components/dashboard/account-management/AccountSelector";
 
 const DashboardPage = () => {
   const { user } = useContext(AuthContext);
@@ -20,14 +17,16 @@ const DashboardPage = () => {
   const [modalContent, setModalContent] = useState(null);
   const [activeTab, setActiveTab] = useState("operations");
 
-  const openModal = (content) => {
-    setModalContent(content);
-    setIsModalOpen(true);
+  const handleModal = (content) => {
+    if (modalContent == null) {
+      setModalContent(content);
+      setIsModalOpen(true);
+    } else {
+      setModalContent(null);
+      setIsModalOpen(false);
+    }
   };
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setModalContent(null);
-  };
+
 
   const trades = [
     { date: "2024-02-28", pair: "BTC/USDT", pnl: 120.32, amount: 1820 },
@@ -36,8 +35,6 @@ const DashboardPage = () => {
     { date: "2024-02-25", pair: "BNB/USDT", pnl: 65.12, amount: 1500 },
     { date: "2024-02-24", pair: "ADA/USDT", pnl: -18.72, amount: 1100 },
   ];
-
-
 
   if (!user) {
     return <Navigate to="/" />;
@@ -49,41 +46,20 @@ const DashboardPage = () => {
 
   return (
     <div className="flex flex-col bg-gray-900 text-gray-200">
-      {/* Main content */}
-      <main className="p-4">
-        <Modal isOpen={isModalOpen} onClose={closeModal} title="Operando">
+      <main className="px-4">
+        <AccountSelector/>
+        <Modal isOpen={isModalOpen} onClose={handleModal} title="Operando">
           {modalContent}
         </Modal>
-        {/* Summary cards */}
-        <SummaryCards trades={trades}/>
-
-        {/* Navigation tabs - scrollable on mobile */}
+        <SummaryCards trades={trades} />
         <NavigationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-
-        {/* Action buttons - responsive layout */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          <button
-            onClick={() => openModal(<TradeForm />)}
-            className="flex items-center gap-2 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-          >
-            <Plus size={16} />
-            <span className="hidden sm:inline">Nuevo Trade</span>
-            <span className="sm:hidden">Nuevo</span>
-          </button>
-          <FilterButton
-            toggleFilters={toggleFilters}
-            showFilters={showFilters}
-          />
-          <button className="flex items-center gap-2 bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-600 ml-auto">
-            <Download size={16} />
-            <span className="hidden sm:inline">Exportar</span>
-          </button>
-        </div>
-
+        <ActionButtons
+          toggleFilters={toggleFilters}
+          showFilters={showFilters}
+          openModal={handleModal}
+        />
         <FilterPanel showFilters={showFilters} />
         <TradeList trades={trades} />
-
-        {/* Paginación móvil simplificada */}
         <Pagination />
       </main>
     </div>
