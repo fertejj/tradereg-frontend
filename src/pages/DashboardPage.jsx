@@ -9,6 +9,7 @@ import NavigationTabs from "../components/dashboard/trade-management/NavigationT
 import SummaryCards from "../components/dashboard/SummaryCards";
 import ActionButtons from "../components/dashboard/trade-management/ActionButtons";
 import AccountSelector from "../components/dashboard/account-management/AccountSelector";
+import { AccountProvider } from "../context/AccountContext";
 
 const DashboardPage = () => {
   const { user } = useContext(AuthContext);
@@ -50,7 +51,12 @@ const DashboardPage = () => {
   return (
     <div className="flex flex-col bg-gray-900 text-gray-200">
       <main className="px-4">
+        <AccountProvider>
         <AccountSelector/>
+
+        </AccountProvider>
+
+
         <Modal isOpen={isModalOpen} onClose={handleModal} title={modalTittle}>
           {modalContent}
         </Modal>
