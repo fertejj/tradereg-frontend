@@ -7,7 +7,7 @@ const ActionButtons = ({toggleFilters, showFilters, openModal}) => {
   return (
     <div className="flex flex-wrap gap-2 mb-4">
     <button
-      onClick={() => openModal(<TradeForm />)}
+      onClick={() => openModal(<TradeForm />, "Nuevo Trade")}
       className="flex items-center gap-2 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
     >
       <Plus size={16} />

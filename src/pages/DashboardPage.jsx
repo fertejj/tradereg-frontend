@@ -15,14 +15,17 @@ const DashboardPage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
+  const [modalTittle, setModalTittle] = useState("")
   const [activeTab, setActiveTab] = useState("operations");
 
-  const handleModal = (content) => {
+  const handleModal = (content, tittle) => {
     if (modalContent == null) {
       setModalContent(content);
+      setModalTittle(tittle);
       setIsModalOpen(true);
     } else {
       setModalContent(null);
+      setModalTittle('Nothing')
       setIsModalOpen(false);
     }
   };
@@ -48,7 +51,7 @@ const DashboardPage = () => {
     <div className="flex flex-col bg-gray-900 text-gray-200">
       <main className="px-4">
         <AccountSelector/>
-        <Modal isOpen={isModalOpen} onClose={handleModal} title="Operando">
+        <Modal isOpen={isModalOpen} onClose={handleModal} title={modalTittle}>
           {modalContent}
         </Modal>
         <SummaryCards trades={trades} />

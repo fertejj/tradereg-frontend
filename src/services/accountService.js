@@ -17,17 +17,7 @@ export const accountService = {
       throw error;
     }
   },
-  
-  getAccounts: async () => {
-    try {
-      const response = await apiClient.get('/trading-accounts');
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching accounts:", error);
-      throw error;
-    }
-  },
-  
+    
   getAccountsByUserId: async (userId) => {
     try {
       const response = await apiClient.get(`/trading-accounts/user/${userId}`);
