@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useAccounts } from '../../../context/AccountContext';
-import AccountModal from './AccountModal';
+import React, { useState } from "react";
+import { useAccounts } from "../../../context/AccountContext";
+import AccountModal from "./AccountModal";
 
 const AccountSelector = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,16 +26,24 @@ const AccountSelector = () => {
 
   return (
     <div className="relative my-4">
-      <button 
+      <button
         className="flex items-center justify-between w-full max-w-md px-4 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
         onClick={openModal}
       >
         {selectedAccount ? (
           <>
             <span className="font-medium">{selectedAccount.name}</span>
-            <span className="text-blue-400 font-semibold">{selectedAccount.balance.toFixed(2)} USDT</span>
-            <svg className="w-4 h-4 text-gray-500 ml-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+            <span className="text-blue-400 font-semibold">caca USDT</span>
+            <svg
+              className="w-4 h-4 text-gray-500 ml-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
             </svg>
           </>
         ) : (
