@@ -23,7 +23,9 @@ const AccountList = ({ onAccountSelected }) => {
 
   return (
     <div>
-      {accounts.map(account => (
+      asd
+      {console.log(accounts)}
+      {/* {accounts.map(account => (
         <div key={account.id} className="flex items-center mb-2">
           <div
             className={`flex justify-between items-center flex-1 px-4 py-3 rounded-md cursor-pointer transition-colors ${
@@ -46,7 +48,8 @@ const AccountList = ({ onAccountSelected }) => {
             </svg>
           </button>
         </div>
-      ))}
+      ))} */}
+
     </div>
   );
 };

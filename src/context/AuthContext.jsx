@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
 
 
+
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -24,7 +25,7 @@ const AuthProvider = ({ children }) => {
       const token = res.data.data.token;
       const user = res.data.data.user;
       localStorage.setItem("token", token);
-      setUser({ token, user });
+      localStorage.setItem("userId", user.id);
       return { success: true };
     } catch (error) {
       console.error("Error en login:", error);
@@ -56,6 +57,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     setUser(null);
  
   };

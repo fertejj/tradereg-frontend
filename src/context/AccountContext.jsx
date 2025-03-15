@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-// import axios from 'axios';
+import apiClient, { fetchAccountById, createAccount } from "../utils/apiClient";
 
 // Crear el contexto
 const AccountContext = createContext();
@@ -9,6 +9,7 @@ export const useAccounts = () => useContext(AccountContext);
 
 // Proveedor del contexto
 export const AccountProvider = ({ children }) => {
+  const userId = localStorage.getItem("userId")
   const [accounts, setAccounts] = useState([]);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -16,22 +17,14 @@ export const AccountProvider = ({ children }) => {
 
   // Cargar cuentas desde API
   useEffect(() => {
-    const fetchAccounts = async () => {
+    const fetchAccountsById = async () => {
       setIsLoading(true);
       try {
-        // En producción reemplazar con tu llamada API real
-        // const response = await axios.get('/api/accounts');
-        // const data = response.data;
-        
-        // Simulación de datos
-        const mockAccounts = [
-          { id: 1, name: 'Cuenta Principal', balance: 1250.45 },
-          { id: 2, name: 'Cuenta USDT', balance: 824.33 },
-          { id: 3, name: 'Cuenta Demo', balance: 10000.00 },
-        ];
-        
-        setAccounts(mockAccounts);
-        setSelectedAccount(mockAccounts[0]);
+        const response = await fetchAccountById(userId)
+        setAccounts(response.data)
+        setError(null)
+                
+        setSelectedAccount(accounts[0]);
         setError(null);
       } catch (err) {
         console.error('Error al cargar cuentas:', err);
@@ -41,7 +34,7 @@ export const AccountProvider = ({ children }) => {
       }
     };
 
-    fetchAccounts();
+    fetchAccountsById();
   }, []);
 
   // Función para cambiar la cuenta seleccionada
@@ -64,17 +57,9 @@ export const AccountProvider = ({ children }) => {
     }
 
     try {
-      // En producción, hacer la llamada API real
-      // const response = await axios.post('/api/accounts', { name: accountName });
-      // const newAccount = response.data;
+      const response = await createAccount();
+      const newAccount = response.data;
       
-      // Simulación de creación
-      const newAccount = {
-        id: accounts.length + 1,
-        name: accountName,
-        balance: 0.00
-      };
-
       const updatedAccounts = [...accounts, newAccount];
       setAccounts(updatedAccounts);
       setSelectedAccount(newAccount);

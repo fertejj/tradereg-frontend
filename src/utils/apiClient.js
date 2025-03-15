@@ -1,5 +1,8 @@
 import axios from "axios";
 
+export const fetchAccountById = (id) => apiClient.get(`/accounts/user/${id}`);
+export const createAccount = () => apiClient.post(`/accounts`);
+
 const getToken = () => localStorage.getItem("token");
 
 const apiClient = axios.create({
