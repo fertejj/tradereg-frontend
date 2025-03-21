@@ -33,7 +33,7 @@ const AccountSelector = () => {
         {selectedAccount ? (
           <>
             <span className="font-medium">{selectedAccount.name}</span>
-            <span className="text-blue-400 font-semibold">caca USDT</span>
+            <span className="text-blue-400 font-semibold">10236,76</span>
             <svg
               className="w-4 h-4 text-gray-500 ml-2"
               viewBox="0 0 20 20"

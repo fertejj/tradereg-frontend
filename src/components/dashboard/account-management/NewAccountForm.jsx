@@ -13,7 +13,7 @@ const NewAccountForm = ({ onSuccess, onError }) => {
       if (isNaN(balanceValue) || balanceValue < 0) {
         throw new Error("El balance inicial debe ser un número válido mayor o igual a cero");
       }
-
+      console.log(newAccountName, balanceValue)
       // Pasamos el nombre y el balance inicial
       await createAccount(newAccountName, balanceValue);
       
@@ -46,7 +46,7 @@ const NewAccountForm = ({ onSuccess, onError }) => {
           value={newAccountName}
           onChange={(e) => setNewAccountName(e.target.value)}
         />
-        <div className="relative flex-shrink-0 min-w-[100px] sm:min-w-[150px]">
+        <div className="relative min-w-[100px] sm:min-w-[150px]">
           <input
             type="text"
             placeholder="Balance inicial"

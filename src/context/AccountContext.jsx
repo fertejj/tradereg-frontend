@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect, useContext } from 'react';
-import apiClient, { fetchAccountById, createAccount } from "../utils/apiClient";
+import { createContext, useState, useEffect, useContext } from "react";
+import apiClient from "../utils/apiClient";
 
 // Crear el contexto
 const AccountContext = createContext();
@@ -9,7 +9,7 @@ export const useAccounts = () => useContext(AccountContext);
 
 // Proveedor del contexto
 export const AccountProvider = ({ children }) => {
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
   const [accounts, setAccounts] = useState([]);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,98 +18,102 @@ export const AccountProvider = ({ children }) => {
   // Cargar cuentas desde API
   useEffect(() => {
     const fetchAccountsById = async () => {
+      if (!userId) return;
       setIsLoading(true);
       try {
-        const response = await fetchAccountById(userId)
-        setAccounts(response.data)
-        setError(null)
-                
-        setSelectedAccount(accounts[0]);
+        const response = await apiClient.get(`accounts/user/${userId}`);
+        const fetchedAccounts = response.data.data;
+        console.log(fetchedAccounts);
+        setAccounts(fetchedAccounts);
+
+        if (fetchedAccounts.length > 0 && !selectedAccount) {
+          setSelectedAccount(fetchedAccounts[0]);
+        }
         setError(null);
       } catch (err) {
-        console.error('Error al cargar cuentas:', err);
-        setError('No se pudieron cargar las cuentas');
+        console.error("Error al cargar cuentas:", err);
+        setError("No se pudieron cargar las cuentas");
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchAccountsById();
-  }, []);
+  }, [userId, selectedAccount]);
 
-  // Función para cambiar la cuenta seleccionada
-  const selectAccount = (accountId) => {
-    const account = accounts.find(acc => acc.id === parseInt(accountId));
-    if (account) {
-      setSelectedAccount(account);
+  const deleteAccount = async (accountId) => {
+    if (!accountId) {
+      throw new Error("ID de cuenta no válido");
+    }
+
+    try {
+      // Llamada a la API para eliminar la cuenta
+      await apiClient.delete(`/accounts/${accountId}`);
+
+      // Actualizar el estado local eliminando la cuenta
+      const updatedAccounts = accounts.filter(
+        (account) => account._id !== accountId
+      );
+      setAccounts(updatedAccounts);
+
+      // Si la cuenta eliminada era la seleccionada, seleccionar otra si existe
+      if (selectedAccount && selectedAccount._id === accountId) {
+        if (updatedAccounts.length > 0) {
+          setSelectedAccount(updatedAccounts[0]);
+        } else {
+          setSelectedAccount(null);
+        }
+      }
+
+      return true;
+    } catch (err) {
+      console.error("Error al eliminar la cuenta:", err);
+      throw new Error("No se pudo eliminar la cuenta");
     }
   };
 
   // Función para crear una nueva cuenta
-  const createAccount = async (accountName) => {
+  const createAccount = async (accountName, balanceValue) => {
     if (!accountName.trim()) {
-      throw new Error('El nombre de la cuenta no puede estar vacío');
+      throw new Error("El nombre de la cuenta no puede estar vacío");
     }
-
-    // Validar duplicados
-    if (accounts.some(acc => acc.name.toLowerCase() === accountName.toLowerCase())) {
-      throw new Error('Ya existe una cuenta con este nombre');
-    }
-
     try {
-      const response = await createAccount();
+      const accountData = {
+        name: accountName,
+        initialBalance: balanceValue,
+        user: userId,
+      };
+      const response = await apiClient.post("/accounts", accountData);
       const newAccount = response.data;
-      
-      const updatedAccounts = [...accounts, newAccount];
+      console.log("Cuenta creada con exito:", newAccount);
+      // Asegurarse de que accounts es un array antes de usar el operador spread
+      const currentAccounts = Array.isArray(accounts) ? accounts : [];
+      const updatedAccounts = [...currentAccounts, newAccount];
+
       setAccounts(updatedAccounts);
       setSelectedAccount(newAccount);
-      
+
       return newAccount;
     } catch (err) {
-      console.error('Error al crear cuenta:', err);
-      throw new Error('No se pudo crear la cuenta');
+      console.error("Error al crear cuenta:", err);
+      throw new Error("No se pudo crear la cuenta");
     }
   };
 
-  // Función para eliminar una cuenta
-  const deleteAccount = async (accountId) => {
-    if (accounts.length <= 1) {
-      throw new Error('No puedes eliminar tu única cuenta');
-    }
-
-    try {
-      // En producción, hacer la llamada API real
-      // await axios.delete(`/api/accounts/${accountId}`);
-      
-      const updatedAccounts = accounts.filter(acc => acc.id !== accountId);
-      setAccounts(updatedAccounts);
-      
-      // Si se eliminó la cuenta seleccionada, seleccionar otra
-      if (selectedAccount && selectedAccount.id === accountId) {
-        setSelectedAccount(updatedAccounts[0]);
-      }
-      
-      return true;
-    } catch (err) {
-      console.error('Error al eliminar cuenta:', err);
-      throw new Error('No se pudo eliminar la cuenta');
-    }
-  };
+  // Función para cambiar la cuenta seleccionada
 
   // Valores a proporcionar a través del contexto
   const value = {
     accounts,
     selectedAccount,
+    setSelectedAccount,
     isLoading,
+    deleteAccount,
     error,
-    selectAccount,
     createAccount,
-    deleteAccount
   };
 
   return (
-    <AccountContext.Provider value={value}>
-      {children}
-    </AccountContext.Provider>
+    <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
   );
 };
