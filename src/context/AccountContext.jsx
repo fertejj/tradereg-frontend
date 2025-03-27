@@ -23,8 +23,6 @@ export const AccountProvider = ({ children }) => {
       try {
         const response = await apiClient.get(`accounts/user/${userId}`);
         const fetchedAccounts = response.data.data;
-        console.log(fetchedAccounts);
-        setAccounts(fetchedAccounts);
 
         if (fetchedAccounts.length > 0 && !selectedAccount) {
           setSelectedAccount(fetchedAccounts[0]);

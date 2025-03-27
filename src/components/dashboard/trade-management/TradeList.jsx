@@ -20,8 +20,8 @@ const TradeList = ({trades}) => {
               key={index}
               className="border-t border-gray-700 hover:bg-gray-750"
             >
-              <td className="p-3 text-sm sm:text-base">{trade.date}</td>
-              <td className="p-3 text-sm sm:text-base">{trade.pair}</td>
+              <td className="p-3 text-sm sm:text-base">{trade.closedAt}</td>
+              <td className="p-3 text-sm sm:text-base">{trade.symbol}</td>
               <td
                 className={`p-3 text-right text-sm sm:text-base ${
                   trade.pnl >= 0 ? "text-green-500" : "text-red-500"
@@ -30,7 +30,7 @@ const TradeList = ({trades}) => {
                 {trade.pnl.toFixed(2)} USDT
               </td>
               <td className="p-3 text-right text-sm sm:text-base">
-                {trade.amount} USDT
+                {trade.operatedVolume} USDT
               </td>
               <td className="p-3">
                 <div className="flex justify-center gap-2">
