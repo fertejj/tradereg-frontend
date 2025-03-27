@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { tradeService } from "../../../services/tradeService";
+import { useAccounts } from "../../../context/AccountContext";
 
 export default function TradeForm({ onClose }) {
+
+    const { selectedAccount, isLoading } = useAccounts();
+  
   // Estado que maneja el trade
   const [trade, setTrade] = useState({
     symbol: "BTC/USD",
@@ -18,24 +22,6 @@ export default function TradeForm({ onClose }) {
     closedAt: new Date().toISOString(),
   });
 
-  // Calculamos el PnL automáticamente cuando cambian los precios, volumen o apalancamiento
-  const calculatePnL = () => {
-    if (!trade.entryPrice || !trade.exitPrice || !trade.operatedVolume)
-      return 0;
-
-    const multiplier = trade.side === "LONG" ? 1 : -1;
-    // Aplicamos el apalancamiento al cálculo del PnL
-    const priceChange = trade.exitPrice - trade.entryPrice;
-    const percentChange = priceChange / trade.entryPrice;
-    const leveragedPercentChange = percentChange * trade.leverage;
-    const pnl = (
-      trade.operatedVolume *
-      leveragedPercentChange *
-      multiplier
-    ).toFixed(2);
-    return pnl;
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -50,24 +36,6 @@ export default function TradeForm({ onClose }) {
     } else {
       setTrade({ ...trade, [name]: value });
     }
-
-    // Actualizamos el PnL automáticamente cuando cambian los valores relevantes
-    if (
-      [
-        "entryPrice",
-        "exitPrice",
-        "operatedVolume",
-        "side",
-        "leverage",
-      ].includes(name)
-    ) {
-      setTimeout(() => {
-        setTrade((prevTrade) => ({
-          ...prevTrade,
-          pnl: calculatePnL(),
-        }));
-      }, 100);
-    }
   };
 
   const handleSubmit = (e) => {
@@ -75,7 +43,8 @@ export default function TradeForm({ onClose }) {
 
     // Determinamos el resultado automáticamente basado en el PnL
     const result = parseFloat(trade.pnl) > 0 ? "GANADORA" : "PERDEDORA";
-    const finalTrade = { ...trade, result };
+    const tradingAccount = selectedAccount._id
+    const finalTrade = { ...trade, result, tradingAccount};
     console.log(finalTrade)
     tradeService.createTrade(finalTrade);
     onClose && onClose();
@@ -135,7 +104,7 @@ export default function TradeForm({ onClose }) {
           {/* Volumen operado */}
           <div>
             <label className="block text-sm font-medium mb-1">
-              Volumen operado
+              Margen
             </label>
             <input
               type="number"
@@ -177,7 +146,7 @@ export default function TradeForm({ onClose }) {
             />
           </div>
 
-          {/* PnL (calculado automáticamente) */}
+          {/* PnL*/}
           <div>
             <label className="block text-sm font-medium mb-1">PnL</label>
             <input
@@ -185,8 +154,8 @@ export default function TradeForm({ onClose }) {
               step="0.01"
               name="pnl"
               value={trade.pnl}
-              readOnly
-              className="w-full p-2 bg-gray-700 border border-gray-700 rounded cursor-not-allowed"
+              onChange={handleChange}
+              className="w-full p-2 bg-gray-800 border border-gray-700 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
@@ -203,7 +172,7 @@ export default function TradeForm({ onClose }) {
             />
           </div>
 
-          {/* Resultado - ocultado porque será calculado automáticamente */}
+          {/* Resultado */}
           <div className="hidden">
             <label className="block text-sm font-medium mb-1">Resultado</label>
             <select
@@ -217,29 +186,6 @@ export default function TradeForm({ onClose }) {
             </select>
           </div>
         </div>
-
-        {/* Resultado visual basado en el PnL calculado */}
-        <div className="mt-4">
-          <div className="flex items-center">
-            <div className="mr-2 text-sm font-medium">Resultado esperado:</div>
-            <div
-              className={`py-1 px-3 rounded-full text-sm font-medium ${
-                parseFloat(trade.pnl) > 0
-                  ? "bg-green-900 text-green-300"
-                  : parseFloat(trade.pnl) < 0
-                  ? "bg-red-900 text-red-300"
-                  : "bg-gray-700 text-gray-300"
-              }`}
-            >
-              {parseFloat(trade.pnl) > 0
-                ? "GANADORA"
-                : parseFloat(trade.pnl) < 0
-                ? "PERDEDORA"
-                : "NEUTRAL"}
-            </div>
-          </div>
-        </div>
-
         <div className="pt-4">
           <button
             type="submit"

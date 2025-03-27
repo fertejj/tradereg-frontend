@@ -54,7 +54,6 @@ const DashboardPage = () => {
         <AccountProvider>
         <AccountSelector/>
 
-        </AccountProvider>
 
 
         <Modal isOpen={isModalOpen} onClose={handleModal} title={modalTittle}>
@@ -66,10 +65,11 @@ const DashboardPage = () => {
           toggleFilters={toggleFilters}
           showFilters={showFilters}
           openModal={handleModal}
-        />
+          />
         <FilterPanel showFilters={showFilters} />
         <TradeList trades={trades} />
         <Pagination />
+          </AccountProvider>
       </main>
     </div>
   );
